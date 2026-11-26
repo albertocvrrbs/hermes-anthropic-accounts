@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.DS_Store
+# Runtime state lives in $HERMES_HOME/plugin-data/anthropic-cuentas/, never here.
+# Guard against anyone copying it into the checkout:
+uso.json
+orden.json
+alias.json
+sesiones.json
+auth.json*
+*.bak*

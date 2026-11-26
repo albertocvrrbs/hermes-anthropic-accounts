@@ -1,0 +1,7 @@
+{
+  "name": "anthropic-cuentas",
+  "label": "Claude accounts",
+  "description": "Backend for the Claude account switcher: per-account usage, order, per-chat account.",
+  "version": "0.4.0",
+  "api": "plugin_api.py"
+}

@@ -1,0 +1,15 @@
+# Hermes agent-plugin manifest. The folder name and every runtime path
+# (plugin-data/anthropic-cuentas/, /api/plugins/anthropic-cuentas/) derive from
+# `name`, so it stays "anthropic-cuentas" even though the repo is
+# hermes-anthropic-accounts.
+name: "anthropic-cuentas"
+label: "Claude accounts"
+version: "0.4.0"
+description: "Claude accounts per chat: each chat keeps its own Anthropic account and switches on its own to the one with most usage left when it runs out (also mid-task and in subagents); drag to reorder, aliases, remove accounts."
+author: "albertocvrrbs"
+manifest_version: 1
+kind: "standalone"
+provides_tools: []
+provides_hooks: []
+provides_middleware: []
+requires_env: []
