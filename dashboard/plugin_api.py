@@ -54,12 +54,20 @@ def _load_store():
     name = "anthropic_cuentas_store"
     path = Path(__file__).resolve().parent.parent / "store.py"
     mod = sys.modules.get(name)
-    if mod is not None and getattr(mod, "__file__", None) == str(path):
+    try:
+        st = path.stat()
+        stamp = (st.st_mtime_ns, st.st_size)
+    except OSError:
+        stamp = None
+    # Same file and same bytes only: a plugin update rewrites store.py under the same path.
+    if mod is not None and getattr(mod, "__file__", None) == str(path) \
+            and getattr(mod, "_LOADED_STAMP", None) == stamp:
         return mod
     spec = importlib.util.spec_from_file_location(name, path)
     mod = importlib.util.module_from_spec(spec)  # type: ignore[arg-type]
     sys.modules[name] = mod
     spec.loader.exec_module(mod)  # type: ignore[union-attr]
+    mod._LOADED_STAMP = stamp
     return mod
 
 

@@ -4,7 +4,7 @@
 # hermes-anthropic-accounts.
 name: "anthropic-cuentas"
 label: "Claude accounts"
-version: "0.4.0"
+version: "0.4.1"
 description: "Claude accounts per chat: each chat keeps its own Anthropic account and switches on its own to the one with most usage left when it runs out (also mid-task and in subagents); drag to reorder, aliases, remove accounts."
 author: "albertocvrrbs"
 manifest_version: 1

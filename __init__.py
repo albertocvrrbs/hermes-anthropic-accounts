@@ -33,17 +33,31 @@ FAST_ROTATE_MIN_WAIT = 45.0   # s: a 429 asking to wait less than this is a bump
 _TLS = threading.local()
 
 
+def _file_stamp(path):
+    try:
+        st = path.stat()
+        return (st.st_mtime_ns, st.st_size)
+    except OSError:
+        return None
+
+
 def _load_store():
     name = "anthropic_cuentas_store"
     mod = sys.modules.get(name)
     path = Path(__file__).resolve().parent / "store.py"
+    stamp = _file_stamp(path)
+    # Reuse the cached module only when it is the same file AND the same bytes on disk: a plugin
+    # update rewrites store.py under the same path, and a long-lived process must not pair the
+    # new hooks with the old store (AttributeError on constants added in the update).
     if mod is not None and getattr(mod, "__file__", None) == str(path) \
-            and getattr(mod, "rank_entries", None) is not None:
+            and getattr(mod, "rank_entries", None) is not None \
+            and getattr(mod, "_LOADED_STAMP", None) == stamp:
         return mod
     spec = importlib.util.spec_from_file_location(name, path)
     mod = importlib.util.module_from_spec(spec)  # type: ignore[arg-type]
     sys.modules[name] = mod
     spec.loader.exec_module(mod)  # type: ignore[union-attr]
+    mod._LOADED_STAMP = stamp
     return mod
 
 
