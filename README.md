@@ -1,3 +1,5 @@
+![Anthropic Accounts, a Hermes plugin: one Claude account per chat, switched to the one with the most usage left when it runs out](assets/catalog-banner.png)
+
 # Hermes Anthropic Accounts
 
 [![Follow @albertocvrrbs on X](https://img.shields.io/badge/Follow%20@albertocvrrbs-on%20X-000000?logo=x&logoColor=white&style=for-the-badge)](https://x.com/albertocvrrbs)
@@ -31,6 +33,15 @@ uses and how much it has left. Click it for the full panel.
 - **Stable token refresh.** With a pool, a per-request token refresh only reads the token of the
   chat's own entry, so a session cannot hop accounts between two calls of the same turn.
 - English and Spanish UI; it follows the app's language (`display.language`).
+
+## Screenshots
+
+The status-bar chip and its panel. The panel is the plugin's real UI rendered with demo data (no real
+accounts); the surrounding window is a simplified mockup of Hermes.
+
+![The Claude accounts panel open from the status-bar chip in Hermes](assets/screenshot-app.png)
+
+<img src="assets/screenshot-panel.png" alt="Claude accounts panel: this chat's account, the backup, and 5-hour and weekly usage per account" width="420">
 
 ## Install
 
