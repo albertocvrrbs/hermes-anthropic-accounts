@@ -107,6 +107,17 @@ lists them). They are written to fall back to the original behavior when anythin
 but a Hermes release that renames those functions can disable the plugin's hooks; the
 dashboard half keeps working either way.
 
+### Catalog status
+
+The plugin is not in the official Hermes plugin catalog yet. `hermes plugins validate` refuses
+the hooks above under catalog rule 9 (no runtime overrides of core) and warns on the private
+imports. The per-account usage read also uses each entry's token, which rule 11 does not allow. The
+credential-pool seams that would replace all of that are requested in
+[NousResearch/hermes-agent#160828](https://github.com/NousResearch/hermes-agent/issues/160828):
+a `credential_select` hook, opting out of the revert to the original account, a per-entry usage
+read by id, rotation on the first long rate limit, and token refresh scoped to the bound entry.
+Once they land, the plugin will move to them and be submitted.
+
 ### State
 
 Everything is stored in `$HERMES_HOME/plugin-data/anthropic-cuentas/` (file names are kept
